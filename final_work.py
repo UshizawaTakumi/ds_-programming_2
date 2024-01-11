@@ -50,3 +50,30 @@ df_january = df_january.iloc[3:]
 
 # インデックスを1から始める
 df_january.index = range(1, len(df_january) + 1)
+
+#12月のデータを処理
+# 欠損値処理
+df_december.isnull().sum()
+
+#データの収集開始日に合わせてデータを加工
+# 1行目から12行目までを削除
+df_december = df_december.drop(index=range(1, 13))
+
+# インデックスをリセット
+df_december = df_december.reset_index(drop=True)
+
+#1月のデータを処理
+# 欠損値処理
+df_january.isnull().sum()
+
+
+#データの収集開始日に合わせてデータを加工
+
+# 欠損値を含む行を削除
+df_january = df_january.dropna()
+
+# 月ごとのデータフレームを連結
+df_connected = pd.concat([df_december, df_january], axis=0, ignore_index=True)
+
+# 連結したデータフレームをリストに格納
+data_list = [df_connected]
