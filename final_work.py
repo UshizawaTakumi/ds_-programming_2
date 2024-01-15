@@ -96,6 +96,9 @@ df_connected = df_connected.rename(columns={
 
 df_connected = df_connected.rename(columns={'現地_平均_平均': 'average atmospheric pressure over land'})
 
+# データをCSVファイルに保存
+df_connected.to_csv('weather_data.csv', index=False)
+
 import sqlite3
 # DBファイルを保存するためのファイルパス
 
@@ -112,12 +115,11 @@ con = sqlite3.connect(path + db_name)
 # SQLを実行するためのオブジェクトを取得
 cur = con.cursor()
 
-
 # テーブルを作成するSQL
-sql_create_table_scraping_wether = 'CREATE TABLE scraping_wether(id INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, average_atmospheric_pressure_over_land	FLOAT, mean_pressure_at_sea_level FLOAT, total_precipitation FLOAT, Total_precipitation_for_up_to_1_hour FLOAT,	Total_precipitation_for_up_to_10_minutes FLOAT,	average_temperature	FLOAT, Highest_temperature FLOAT,	Lowest_Temperature FLOAT,	average_vapor_pressure FLOAT,	average_humidity FLOAT,	minimum_humidity FLOAT );'
+sql_create_table_scraping_weather = 'CREATE TABLE scraping_weather(id INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, average_atmospheric_pressure_over_land	FLOAT, mean_pressure_at_sea_level FLOAT, total_precipitation FLOAT, Total_precipitation_for_up_to_1_hour FLOAT,	Total_precipitation_for_up_to_10_minutes FLOAT,	average_temperature	FLOAT, Highest_temperature FLOAT,	Lowest_Temperature FLOAT,	average_vapor_pressure FLOAT,	average_humidity FLOAT,	minimum_humidity FLOAT );'
 
 # 4．SQLを実行する
-cur.execute(sql_create_table_scraping_wether)
+cur.execute(sql_create_table_scraping_weather)
 
 
 # DataFrameをデータベースに挿入

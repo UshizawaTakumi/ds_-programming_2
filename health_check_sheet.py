@@ -44,6 +44,9 @@ df = df.rename(columns={
     '名前' : 'name' 
 })
 
+# データをCSVファイルに保存
+df.to_csv('helth_data.csv', index=False)
+
 import sqlite3
 
 # DBファイルを保存するためのファイルパス
